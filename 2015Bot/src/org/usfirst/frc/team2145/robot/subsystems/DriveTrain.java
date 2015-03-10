@@ -14,6 +14,7 @@ import org.usfirst.frc.team2145.robot.Robot;
 import org.usfirst.frc.team2145.robot.RobotMap;
 import org.usfirst.frc.team2145.robot.commands.DriveWithController;
 import edu.wpi.first.wpilibj.smartdashboard.*;
+import edu.wpi.first.wpilibj.CANTalon;
 
 
 public class DriveTrain extends PIDSubsystem{
@@ -25,13 +26,14 @@ public class DriveTrain extends PIDSubsystem{
 	
 	Encoder backRightEncoder = new Encoder(RobotMap.backRightEncoder1,RobotMap.backRightEncoder2);
 	Encoder backLeftEncoder= new Encoder(RobotMap.backLeftEncoder1,RobotMap.backLeftEncoder2);
-	//Encoder liftEncoder = new Encoder(RobotMap.liftEncoder1, RobotMap.liftEncoder2);
+	
 	
 	Gyro gyro = new Gyro(RobotMap.driveGyro);
 	
 	PIDController encoderPID;
 	PIDSource ePIDSource;
 	PIDOutput ePIDOutput;
+	
 	
 	
 	
@@ -68,6 +70,8 @@ public class DriveTrain extends PIDSubsystem{
 		double forward= Y;
 		double right= X;
 		double clockwise= Z;
+		//frontLeftWheel.enableControl();
+		
 		//Gets Directions like from Joy Sticks.
 		
 		double front_left = forward + clockwise + right;
@@ -103,6 +107,7 @@ public class DriveTrain extends PIDSubsystem{
 	
 	public void log(){
 		SmartDashboard.putNumber("Encoder", encoderValue());
+		
 		//SmartDashboard.putNumber("Lift Encoder", liftEncoder.getDistance());
 	}
 
@@ -112,7 +117,7 @@ public class DriveTrain extends PIDSubsystem{
 	}
 	
 	public double gyroValue(){
-		return gyro.getAngle();
+		return (gyro.getAngle() * 2);
 	}
 	
 	public void gyroReset(){
@@ -125,22 +130,14 @@ public class DriveTrain extends PIDSubsystem{
 		return encoderAverage;
 	}
 	
-	public void driveStraightToDistance(double distance){
-		if(Robot.driveTrain.encoderValue() > distance){
-			Robot.driveTrain.usePIDOutput(-0.3);
-		}
-		else{
-			Robot.driveTrain.usePIDOutput(0);
-		}
-		
-	}
+
 	
 	public double leftEncoderValue(){
 		return backLeftEncoder.getDistance() / 14.331210191082802547770700636943;
 	}
 	
 	public double rightEncoderValue(){
-		return backRightEncoder.getDistance();
+		return backRightEncoder.getDistance() / 14.331210191082802547770700636943;
 	}
 	
 }

@@ -30,7 +30,7 @@ public class OI {
 	}
 	
 	public double StickX () {
-		return stick.getRawAxis(0);
+		return -(stick.getRawAxis(0));
 	} 
 	
 	public double StickZ () {

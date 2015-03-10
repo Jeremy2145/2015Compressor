@@ -1,16 +1,24 @@
 
 package org.usfirst.frc.team2145.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.vision.USBCamera;
 
 import org.usfirst.frc.team2145.robot.commands.Autonomous;
 import org.usfirst.frc.team2145.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2145.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2145.robot.subsystems.Lift;
 import org.usfirst.frc.team2145.robot.subsystems.Slide;
+
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.Image;
+
+
 
 
 /**
@@ -29,8 +37,16 @@ public class Robot extends IterativeRobot {
 	public static Slide slide;
 	
 	
+	int session;
+    Image frame;
+	
+	
     Command autonomousCommand;
     
+    public Robot(){
+    	
+        
+    }
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -42,12 +58,22 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         // instantiate the command used for the autonomous period
         autonomousCommand = new Autonomous();
+        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+
+        // the camera name (ex "cam0") can be found through the roborio web interface
+        session = NIVision.IMAQdxOpenCamera("cam1",
+        NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        NIVision.IMAQdxConfigureGrab(session);
         
     }
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		log();
+		NIVision.IMAQdxStartAcquisition(session);
+		NIVision.IMAQdxGrab(session, frame, 1);
+        CameraServer.getInstance().setImage(frame);
+        
 	}
 
     public void autonomousInit() {
@@ -61,6 +87,10 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         log();
+        NIVision.IMAQdxStartAcquisition(session);
+		NIVision.IMAQdxGrab(session, frame, 1);
+		
+        CameraServer.getInstance().setImage(frame);
     }
 
     public void teleopInit() {
@@ -85,6 +115,10 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         log();
+        NIVision.IMAQdxStartAcquisition(session);
+		NIVision.IMAQdxGrab(session, frame, 1);
+		
+        CameraServer.getInstance().setImage(frame);
         
     }
     
@@ -94,6 +128,9 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
         LiveWindow.run();
         log();
+        NIVision.IMAQdxStartAcquisition(session);
+		NIVision.IMAQdxGrab(session, frame, 1);
+        CameraServer.getInstance().setImage(frame);
     }
     private void log() {
         driveTrain.log();

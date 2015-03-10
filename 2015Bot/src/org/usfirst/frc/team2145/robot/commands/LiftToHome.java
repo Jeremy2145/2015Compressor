@@ -16,7 +16,7 @@ public class LiftToHome extends Command{
 
 	@Override
 	protected void execute() {
-		if(Robot.lift.homeSwitchValue() != 1){
+		if(Robot.lift.homeSwitchValue()){
 			Robot.lift.liftDrive(-0.7);
 		}
 		else{
@@ -26,8 +26,7 @@ public class LiftToHome extends Command{
 
 	@Override
 	protected boolean isFinished() {
-		
-		return false;
+		return Robot.lift.isLiftAtHome();
 	}
 
 	@Override

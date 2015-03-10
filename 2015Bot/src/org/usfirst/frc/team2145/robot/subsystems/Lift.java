@@ -43,9 +43,13 @@ public class Lift extends PIDSubsystem {
 	}
 	public void liftEncoderReset(){
 		liftEncoder.reset();
+	} 
+	
+	public boolean homeSwitchValue(){
+		return homeSwitch.get();
 	}
-	public double homeSwitchValue(){
-		return homeSwitch.getChannel();
+	public boolean isLiftAtHome(){
+		return homeSwitch.getChannel() == 1;
 	}
 	
 }
