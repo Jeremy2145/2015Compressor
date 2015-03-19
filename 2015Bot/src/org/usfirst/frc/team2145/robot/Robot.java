@@ -6,10 +6,9 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.vision.USBCamera;
 
 import org.usfirst.frc.team2145.robot.commands.Autonomous;
+import org.usfirst.frc.team2145.robot.subsystems.Arms;
 import org.usfirst.frc.team2145.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2145.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2145.robot.subsystems.Lift;
@@ -35,7 +34,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Lift lift;
 	public static Slide slide;
-	
+	public static Arms arm;
 	
 	int session;
     Image frame;
@@ -64,6 +63,7 @@ public class Robot extends IterativeRobot {
         session = NIVision.IMAQdxOpenCamera("cam1",
         NIVision.IMAQdxCameraControlMode.CameraControlModeController);
         NIVision.IMAQdxConfigureGrab(session);
+        
         
     }
 	
@@ -99,6 +99,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        
     }
 
     /**
@@ -119,7 +120,7 @@ public class Robot extends IterativeRobot {
 		NIVision.IMAQdxGrab(session, frame, 1);
 		
         CameraServer.getInstance().setImage(frame);
-        
+        Robot.slide.startCompressor();
     }
     
     /**

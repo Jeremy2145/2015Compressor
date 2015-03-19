@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 
-import org.usfirst.frc.team2145.robot.Robot;
+
 import org.usfirst.frc.team2145.robot.RobotMap;
 import org.usfirst.frc.team2145.robot.commands.DriveWithController;
 import edu.wpi.first.wpilibj.smartdashboard.*;
-import edu.wpi.first.wpilibj.CANTalon;
+
 
 
 public class DriveTrain extends PIDSubsystem{

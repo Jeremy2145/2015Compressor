@@ -49,7 +49,7 @@ public class Lift extends PIDSubsystem {
 		return homeSwitch.get();
 	}
 	public boolean isLiftAtHome(){
-		return homeSwitch.getChannel() == 1;
+		return homeSwitch.get() == true;
 	}
 	
 }

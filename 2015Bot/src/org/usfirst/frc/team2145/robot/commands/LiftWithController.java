@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team2145.robot.commands;
 
 import org.usfirst.frc.team2145.robot.Robot;
@@ -16,6 +17,9 @@ public class LiftWithController extends Command{
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.lift.liftDrive(Robot.oi.StickY2());
+    	if(Robot.lift.isLiftAtHome()){
+    		Robot.lift.liftDrive(0);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
