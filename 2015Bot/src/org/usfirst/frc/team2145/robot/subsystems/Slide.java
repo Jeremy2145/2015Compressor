@@ -37,6 +37,7 @@ public class Slide extends Subsystem{
     }
     public void Stop(){
     	armSolenoid.set(false);
+    	
     }
     //public boolean doesExtenderHaveTote(){
     	//return extendSwitch.getChannel() == 1;
