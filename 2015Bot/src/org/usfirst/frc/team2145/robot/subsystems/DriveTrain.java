@@ -1,16 +1,12 @@
 package org.usfirst.frc.team2145.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-
-import edu.wpi.first.wpilibj.TalonSRX;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Encoder;
-
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
-
-
 import org.usfirst.frc.team2145.robot.RobotMap;
 import org.usfirst.frc.team2145.robot.commands.DriveWithController;
 import edu.wpi.first.wpilibj.smartdashboard.*;
@@ -19,10 +15,10 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 
 public class DriveTrain extends PIDSubsystem{
 	
-	TalonSRX frontRightWheel = new TalonSRX(RobotMap.frontRightWheel);
-	TalonSRX frontLeftWheel = new TalonSRX(RobotMap.frontLeftWheel);
-	TalonSRX backRightWheel = new TalonSRX(RobotMap.backRightWheel);
-	TalonSRX backLeftWheel = new TalonSRX(RobotMap.backLeftWheel);
+	CANTalon frontRightWheel = new CANTalon(RobotMap.frontRightWheel);
+	CANTalon frontLeftWheel = new CANTalon(RobotMap.frontLeftWheel);
+	CANTalon backRightWheel = new CANTalon(RobotMap.backRightWheel);
+	CANTalon backLeftWheel = new CANTalon(RobotMap.backLeftWheel);
 	
 	Encoder backRightEncoder = new Encoder(RobotMap.backRightEncoder1,RobotMap.backRightEncoder2);
 	Encoder backLeftEncoder= new Encoder(RobotMap.backLeftEncoder1,RobotMap.backLeftEncoder2);
@@ -92,8 +88,8 @@ public class DriveTrain extends PIDSubsystem{
 		
 		frontRightWheel.set(front_right);
 		frontLeftWheel.set(-front_left);
-		backRightWheel.set(rear_right);
-		backLeftWheel.set(-rear_left);
+		backRightWheel.set(-rear_right);
+		backLeftWheel.set(rear_left);
 		//Sends Data to Talons
 	}
 	
@@ -125,8 +121,8 @@ public class DriveTrain extends PIDSubsystem{
 	}
 	
 	public double encoderValue(){
-		double encoderAverage = ((backRightEncoder.getDistance() + backLeftEncoder.getDistance()) /2);
-		encoderAverage= (encoderAverage /14.331210191082802547770700636943);
+		double encoderAverage =  backLeftEncoder.getDistance();
+		
 		return encoderAverage;
 	}
 	

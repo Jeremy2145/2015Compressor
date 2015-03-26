@@ -1,9 +1,9 @@
 package org.usfirst.frc.team2145.robot;
 
-import org.usfirst.frc.team2145.robot.commands.ArmWithController;
+
+import org.usfirst.frc.team2145.robot.commands.ExtendWithController;
 import org.usfirst.frc.team2145.robot.commands.GripTote;
 import org.usfirst.frc.team2145.robot.commands.UnGripTote;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -17,8 +17,9 @@ public class OI {
 	Joystick stick = new Joystick(0);
 	Joystick stick2 = new Joystick(1);
 	//Button button = new JoystickButton(stick, 1);
-	Button button1 = new JoystickButton(stick, 2);
-	Button button2 = new JoystickButton(stick, 3);
+	Button button1 = new JoystickButton(stick2, 2);
+	Button button2 = new JoystickButton(stick2, 3);
+	Button button3 = new JoystickButton(stick2, 4);
 	
 	
 	
@@ -50,6 +51,7 @@ public class OI {
 		//button.whileHeld(new ArmWithController());
 		button1.whenPressed(new GripTote());
 		button2.whenPressed(new UnGripTote());
+		button3.whenPressed(new ExtendWithController());
 	}
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.

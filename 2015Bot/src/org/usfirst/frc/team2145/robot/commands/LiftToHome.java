@@ -3,30 +3,31 @@ package org.usfirst.frc.team2145.robot.commands;
 import org.usfirst.frc.team2145.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LiftToHome extends Command{
 	public LiftToHome() {
         
-        requires(Robot.lift);
+        requires(Robot.slide);
     }
 	@Override
 	protected void initialize() {
-		Robot.lift.liftEncoderReset();
+		
 	}
 
 	@Override
 	protected void execute() {
-		if(Robot.lift.homeSwitchValue()){
-			Robot.lift.liftDrive(-0.7);
+		SmartDashboard.putNumber("Lift Encoder", Robot.slide.liftEncoder());
+		if(Robot.slide.liftStop() == false){
+			Robot.slide.extendWithController(0.5);
 		}
 		else{
-			Robot.lift.liftDrive(0);
+			Robot.slide.extendWithController(0);
 		}
-	}
-
+		}
 	@Override
 	protected boolean isFinished() {
-		return Robot.lift.isLiftAtHome();
+		return false;
 	}
 
 	@Override

@@ -60,7 +60,7 @@ public class Robot extends IterativeRobot {
         frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 
         // the camera name (ex "cam0") can be found through the roborio web interface
-        session = NIVision.IMAQdxOpenCamera("cam1",
+        session = NIVision.IMAQdxOpenCamera("cam0",
         NIVision.IMAQdxCameraControlMode.CameraControlModeController);
         NIVision.IMAQdxConfigureGrab(session);
         
@@ -135,6 +135,7 @@ public class Robot extends IterativeRobot {
     }
     private void log() {
         driveTrain.log();
+        slide.log();
     }
         
 }

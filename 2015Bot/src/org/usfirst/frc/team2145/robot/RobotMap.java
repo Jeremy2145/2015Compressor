@@ -7,12 +7,12 @@ package org.usfirst.frc.team2145.robot;
  */
 public class RobotMap {
 		//PWN Inputs
-		public static int liftMotor = 0;
-	    public static int slideMotor = 1;
-	    public static int frontLeftWheel = 2;
-	    public static int frontRightWheel = 3;
-	    public static int backLeftWheel = 4;
-	    public static int backRightWheel = 5;
+		public static int liftMotor = 1;
+	    public static int slideMotor = 0;
+	    public static int frontLeftWheel = 20;
+	    public static int frontRightWheel = 21;
+	    public static int backLeftWheel = 22;
+	    public static int backRightWheel = 23;
 	    public static int armMotor = 6;
 	    //public static int armSolenoid1 = 7;
 	    //public static int armSolenoid2 = 8;
@@ -28,10 +28,7 @@ public class RobotMap {
 	    public static int backRightEncoder2 = 3;
 	    public static int liftEncoder1 = 4;
 	    public static int liftEncoder2 = 5;
-	    
-	    
-	    
-	    public static int liftHomeSwitch1 = 8;
+	    public static int liftHomeSwitch1 = 9;
 	    
 	    //public static int rightBackEncoder2 = 10;
 	    //public static int rightBackEncoder2 = 11;

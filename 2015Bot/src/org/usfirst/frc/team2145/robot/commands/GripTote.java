@@ -5,7 +5,9 @@ import org.usfirst.frc.team2145.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class GripTote extends Command{
-
+	public GripTote(){
+		requires(Robot.slide);
+	}
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub

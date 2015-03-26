@@ -14,18 +14,16 @@ public class DriveWithController extends Command {
     protected void initialize() {
     	Robot.driveTrain.encoderReset();
     	Robot.driveTrain.gyroReset();
-    	Robot.lift.liftEncoderReset();
+    	
     	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.MecanumDrive(Robot.oi.StickX(), Robot.oi.StickY(), Robot.oi.StickZ());
-    	SmartDashboard.putNumber("X Value", Robot.oi.StickX());
-    	SmartDashboard.putNumber("Y Value", Robot.oi.StickY());
-    	SmartDashboard.putNumber("Z Value", Robot.oi.StickZ());
+    	Robot.driveTrain.MecanumDrive(Robot.oi.StickZ(), Robot.oi.StickY(), Robot.oi.StickX());
+    	
 		SmartDashboard.putNumber("Gyro", Robot.driveTrain.gyroValue());
-		SmartDashboard.putNumber("Lift Encoder", Robot.lift.liftEncoder());
+		SmartDashboard.putNumber("Lift Encoder", Robot.slide.liftEncoder());
 		//SmartDashboard.putBoolean("Does the robot have a tote/container?", Robot.slide.doesExtenderHaveTote());
 		SmartDashboard.putNumber("Left Encoder", Robot.driveTrain.leftEncoderValue());
 		SmartDashboard.putNumber("Right Encoder", Robot.driveTrain.rightEncoderValue());

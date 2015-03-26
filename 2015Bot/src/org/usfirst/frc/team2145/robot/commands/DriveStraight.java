@@ -2,14 +2,15 @@ package org.usfirst.frc.team2145.robot.commands;
 
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2145.robot.Robot;
 
 public class DriveStraight extends Command {
-	private double distance;
-	public DriveStraight(double carp) {
-		this.distance = carp;
+	
+	Timer time = new Timer();
+	public DriveStraight() {
         requires(Robot.driveTrain);
 	}
 
@@ -17,15 +18,16 @@ public class DriveStraight extends Command {
 	protected void initialize() {
 		Robot.driveTrain.encoderReset();
 		Robot.driveTrain.gyroReset();
+		time.start();
 	}
 
 	@Override
 	protected void execute() {
-		SmartDashboard.putNumber("Target Distance", distance);
+		SmartDashboard.putNumber("Timer", time.get());
 		SmartDashboard.putNumber("Gyro", Robot.driveTrain.gyroValue());
 		SmartDashboard.putNumber("Right Encoder", Robot.driveTrain.rightEncoderValue());
-		if(Robot.driveTrain.rightEncoderValue() > distance){
-			Robot.driveTrain.MecanumDrive(0, -0.3, 0);
+		if(time.get() < 20){
+			Robot.driveTrain.MecanumDrive(0, 0.5, 0);
 		}
 		else{
 			Robot.driveTrain.MecanumDrive(0, 0, 0);
@@ -54,7 +56,7 @@ public class DriveStraight extends Command {
 
 	@Override
 	protected void end() {
-        Robot.driveTrain.MecanumDrive(0, 0, 0);
+        
 	}
 
 	@Override

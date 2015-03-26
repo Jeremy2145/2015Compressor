@@ -1,25 +1,27 @@
 package org.usfirst.frc.team2145.robot.commands;
 
 import org.usfirst.frc.team2145.robot.Robot;
+import edu.wpi.first.wpilibj.Timer;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class LiftToTop extends Command{
+	Timer time = new Timer();
 	public LiftToTop() {
-        requires(Robot.lift);
+        requires(Robot.slide);
     }
 	@Override
 	protected void initialize() {
-		Robot.lift.liftEncoderReset();
+		time.start();
 	}
 
 	@Override
 	protected void execute() {
-		if(Robot.lift.liftEncoder() < 52){
-			Robot.lift.liftDrive(-0.7);
+		if(time.get() < 3){
+			Robot.slide.extendWithController(-0.5);
 		}
 		else{
-			Robot.lift.liftDrive(0);
+			Robot.slide.extendWithController(0);
 		}
 	}
 
@@ -30,7 +32,7 @@ public class LiftToTop extends Command{
 
 	@Override
 	protected void end() {	
-		
+		time.reset();
 	}
 
 	@Override
